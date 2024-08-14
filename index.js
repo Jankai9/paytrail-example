@@ -1,3 +1,4 @@
 import { httpReq } from './paytrailRequest.js'
-httpReq()
 
+const paymentHref = await httpReq()
+console.log("maksun voi tehdä osoitteessa: ", paymentHref)
