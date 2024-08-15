@@ -3,7 +3,7 @@ import crypto from 'crypto';
 
 const SECRET = "SAIPPUAKAUPPIAS";
 
-export async function httpReq() {
+export async function haeMaksuUrlPaytraililta() {
     const httpHeaders = {
         'checkout-account': "375917",
         'checkout-algorithm': 'sha256',
