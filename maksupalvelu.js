@@ -1,9 +1,25 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { haeMaksuUrlPaytraililta } from './paytrailRequest.js'
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Palauta html-sivu
+app.get('/maksu-onnistui', (req, res) => {
+  res.sendFile(path.join(__dirname, 'maksu-onnistui.html'));
+});
+
+// Palauta html-sivu
+app.get('/maksu-keskeytyi', (req, res) => {
+  res.sendFile(path.join(__dirname, 'maksu-keskeytyi.html'));
+});
 
 // Käsittele maksupyyntö osoitteessa /maksaminen?tuote
 app.get('/maksaminen', async (req, res) => {
@@ -13,7 +29,6 @@ app.get('/maksaminen', async (req, res) => {
     console.log('Maksun voi tehdä osoitteessa:', maksuHref);
     // Ohjaa käyttäjä maksusivulle
     res.redirect(maksuHref);
-    // res.status(200).send(`Maksu vastaanotettu tuotteelle: ${tuote}`);
   } catch (error) {
     console.error('Virhe maksun käsittelyssä:', error.message);
     console.error('error:', error);
@@ -23,4 +38,3 @@ app.get('/maksaminen', async (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Palvelin käynnissä portissa ${port}`));
-

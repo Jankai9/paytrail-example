@@ -28,11 +28,11 @@ export async function haeMaksuUrlPaytraililta() {
             },
         ],
         customer: {
-            email: 'test.customer@example.com',
+            email: 'jaska@jotain.com',
         },
         redirectUrls: {
-            success: 'https://ecom.example.com/cart/success',
-            cancel: 'https://ecom.example.com/cart/cancel',
+            success: 'http://localhost:3000/maksu-onnistui',
+            cancel: 'http://localhost:3000/maksu-keskeytyi',
         },
     };
     httpHeaders.signature = calculateHmac(SECRET, httpHeaders, httpBody);
