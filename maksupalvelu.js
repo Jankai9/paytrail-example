@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { haeMaksuUrlPaytraililta } from './paytrailRequest.js'
+import { haeMaksuUrlPaytraililta } from './paytrail.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
