@@ -7,7 +7,6 @@ import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -31,7 +30,7 @@ app.get('/maksaminen', async (req, res) => {
     res.redirect(maksuHref);
   } catch (error) {
     console.error('Virhe maksun käsittelyssä:', error.message);
-    console.error('error:', error);
+    console.error('Virheen tiedot:', error);
     res.status(500).resend('Maksun käsittelyssä tapahtui virhe.');
   }
 });
