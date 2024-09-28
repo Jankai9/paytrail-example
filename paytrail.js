@@ -1,5 +1,6 @@
 import axios from 'axios'
 import crypto from 'crypto'
+import { PROTOKOLLA } from './vakiot.js'
 
 // tähän tulee myöhemmin oikea kauppiastili ja salasana
 const SALASANA = "SAIPPUAKAUPPIAS"
@@ -33,8 +34,8 @@ export async function haeMaksuUrlPaytraililta() {
             email: 'jaska@jotain.com',
         },
         redirectUrls: {
-            success: 'http://localhost:3000/maksu-onnistui',
-            cancel: 'http://localhost:3000/maksu-keskeytyi',
+            success: PROTOKOLLA + '://localhost:3000/maksu-onnistui',
+            cancel: PROTOKOLLA + '://localhost:3000/maksu-keskeytyi',
         },
     }
     otsikot.signature = teeAllekirjoitus(SALASANA, otsikot, sisältö)
@@ -53,7 +54,7 @@ export async function haeMaksuUrlPaytraililta() {
             return ""
         } else {
             // palautetaan osoite maksua varten
-                        return respObj.href
+            return respObj.href
         }
     } catch (error) {
         console.error("Request failed", error)

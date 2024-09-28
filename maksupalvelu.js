@@ -4,6 +4,10 @@ import { haeMaksuUrlPaytraililta } from './paytrail.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+//const fs = require('fs');
+import fs from 'fs';
+import https from 'https';
+import { PROTOKOLLA } from './vakiot.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -12,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Palauta html-sivu
 app.get('/maksu-onnistui', (req, res) => {
+  console.log('Maksu onnistui',req.query);
   res.sendFile(path.join(__dirname, 'maksu-onnistui.html'));
 });
 
@@ -35,5 +40,19 @@ app.get('/maksaminen', async (req, res) => {
   }
 });
 
+
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Palvelin käynnissä portissa ${port}`));
+
+if(PROTOKOLLA === 'http') {
+  app.listen(port, () => console.log(`HTTP Palvelin käynnissä portissa ${port}`));
+}
+else {
+  const httpsOptions = {
+    key: fs.readFileSync(path.join(__dirname, 'ssl/key.pem')),
+    cert: fs.readFileSync(path.join(__dirname, 'ssl/cert.pem'))
+  };
+  
+  https.createServer(httpsOptions, app).listen(port, () => {
+  console.log(`HTTPS palvelin käynnissä portissa ${port}`);
+})}
+
