@@ -1,6 +1,5 @@
 Palvelimen käynnistyskomento ja ja ssl avaimen luontiohjeet
 
-GitHub Copilot: ```markdown
 # Server Setup Instructions
 
 ## Starting the Server
